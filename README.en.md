@@ -1,7 +1,7 @@
 # Synapse
-Synapse是一个基于VS Code的可视化代码智能助手。它可以即时直观地查看函数以及符号之间的调用和引用关系，支持GUI与代码之间的灵活跳转与切换，并支持关系图的动态展开与折叠，能极大地提升软件开发的效率。
+Synapse is a VS Code-based visual code intelligence assistant. It allows for the instantaneous and intuitive viewing of call and reference relationships between functions and symbols. It supports flexible jumping and switching between the GUI and code, as well as the dynamic expansion and collapse of relationship graphs, greatly enhancing software development efficiency.
 
-### 使用示例
+### Operation Demos
 
 #### 1. Outgoing Call Graph
 ![outgoing_call_graph_demo.png](./resource/outgoing.gif)
@@ -10,9 +10,9 @@ Synapse是一个基于VS Code的可视化代码智能助手。它可以即时直
 ![incoming_call_graph_demo.png](./resource/incoming.png)
 
 
-### 环境配置
+### Environment Configuration
 
-Synapse使用了VS Code内置的调用层级 API（即 vscode.prepareCallHierarchy），因此它支持支持提供LSP服务的主流编程语言（Python,Java,C/C++, Rust, TypeScript/JavaScript等）。请根据你所使用的语言，安装相应的扩展插件和 LSP 服务端。
+Synapse utilizes VS Code's built-in call hierarchy API (vscode.prepareCallHierarchy), so it works with mainstream programming languages that provide LSP services (Python, Java, C/C++, Rust, TypeScript/JavaScript, etc.). Please install the appropriate extension and LSP server for your language:
 
 | Language | Extension | LSP server |
 |---|---|---|
@@ -22,11 +22,11 @@ Synapse使用了VS Code内置的调用层级 API（即 vscode.prepareCallHierarc
 | Java | [Language Support for Java](https://marketplace.visualstudio.com/items?itemName=redhat.java) | Eclipse JDT |
 | Python | [Pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance) | Pylance / pylsp |
 
-在使用之前请确保LSP Server处于活动状态。
+Please ensure the LSP Server is active before use.
 
 
-### GUI功能
-将光标置于函数名上，然后点击右键，并在上下文菜单中选择 **Synapse**。
+### GUI Features
+Place your cursor on a function name, then right-click and choose **Synapse** from the context menu. 
 
 | Command | Description |
 |---|---|
@@ -35,12 +35,12 @@ Synapse使用了VS Code内置的调用层级 API（即 vscode.prepareCallHierarc
 | **Generate Outgoing Call Tree** | Same as above, but rendered as a tree layout. |
 | **Generate Reference Graph** | Shows all references to the selected symbol. |
 
-滚动鼠标，可以支持图形的放大和缩小。
+Use the mouse wheel to zoom the graph in and out.
 
 
-### 菜单功能
+### Menu Features
 
-在图形中点击鼠标右键，可以支持图形中节点关系的导出功能。
+Right-click within the graph to access export functions for node relationships.
 
 | Command | Description |
 |---|---|
@@ -50,10 +50,9 @@ Synapse使用了VS Code内置的调用层级 API（即 vscode.prepareCallHierarc
 | **Copy File Path** | Copies the file path of the selected node. |
 | **Jump to Function** | Opens the source file at the selected function's definition. |
 
-The graph panel supports pan and zoom with the mouse.
 
-### 插件配置
-支持配置不同级别（函数/类/文件路径）的黑名单，避免不必要的冗余显示。
+### Extension Settings
+Supports blacklisting at different levels (function/class/file path) to avoid unnecessary redundancy in the display.
 
 | Setting | Default | Description |
 |---|---|---|
@@ -61,8 +60,8 @@ The graph panel supports pan and zoom with the mouse.
 | `Synapse.callGraphClassBlacklist` | `["std"]` | Class/namespace prefixes whose methods are excluded. |
 | `Synapse.callGraphPathBlacklist` | `[]` | File path prefixes to exclude (e.g. third-party or build directories). |
 
-### 版本发布
+### Release History
 
 #### 0.1.0
 
-初始版本.
+Initial release.

@@ -1,0 +1,164 @@
+{
+  "name": "synapse",
+  "displayName": "Synapse",
+  "description": "Call graph visualization for any language with LSP support — incoming, outgoing, and reference graphs rendered with Graphviz.",
+  "version": "0.1.0",
+  "publisher": "synapse",
+  "icon": "resource/icon/logo.png",
+  "repository": "https://gitlabe2.ext.net.nokia.com/weyou/synapse",
+  "engines": {
+    "vscode": "^1.110.0"
+  },
+  "categories": [
+    "Visualization"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "configuration": [
+      {
+        "title": "Call Graph Filter",
+        "properties": {
+          "Synapse.callGraphFunctionBlacklist": {
+            "type": "array",
+            "default": [
+              "operator()"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of function names to be filtered out from the call graph."
+          },
+          "Synapse.callGraphClassBlacklist": {
+            "type": "array",
+            "default": [
+              "std"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of class names to be filtered out from the call graph."
+          },
+          "Synapse.callGraphPathBlacklist": {
+            "type": "array",
+            "default": [
+              "/workspace/uplane/sdkuplane",
+              "/workspace/uplane/build"
+            ],
+            "items": {
+              "type": "string"
+            },
+            "description": "A list of file path prefixes to be filtered out from the call graph."
+          }
+        }
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "submenu": "synapse/submenu",
+          "group": "1_synapse-group"
+        }
+      ],
+      "synapse/submenu": [
+        {
+          "command": "synapse.generateFuncCallGraph",
+          "group": "1_callGraph@1"
+        },
+        {
+          "command": "synapse.generateFuncOutgoingCallGraph",
+          "group": "1_callGraph@2"
+        },
+        {
+          "command": "synapse.generateOutgoingTreeCallGraph",
+          "group": "1_callGraph@3"
+        },
+        {
+          "command": "synapse.generateReferenceCallGraph",
+          "group": "1_callGraph@4"
+        }
+      ]
+    },
+    "submenus": [
+      {
+        "id": "synapse/submenu",
+        "label": "Synapse"
+      }
+    ],
+    "commands": [
+      {
+        "command": "synapse.generateFuncCallGraph",
+        "title": "Generate Incoming Call Graph"
+      },
+      {
+        "command": "synapse.generateReferenceCallGraph",
+        "title": "Generate Reference Graph"
+      },
+      {
+        "command": "synapse.generateOutgoingTreeCallGraph",
+        "title": "Generate Outgoing Call Tree"
+      },
+      {
+        "command": "synapse.generateFuncOutgoingCallGraph",
+        "title": "Generate Outgoing Call Graph"
+      },
+      {
+        "command": "synapse.exportCallGraph",
+        "title": "Export Call Graph To SVG"
+      },
+      {
+        "command": "synapse.exportCallGraphToCsv",
+        "title": "Export Call Graph To CSV"
+      },
+      {
+        "command": "synapse.CallGraphToCopyFuc",
+        "title": "Copy Function"
+      },
+      {
+        "command": "synapse.CallGraphJumpToFunction",
+        "title": "Jump to Function"
+      },
+      {
+        "command": "synapse.CallGraphToCopyFilePath",
+        "title": "Copy File Path"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "overrides": {
+    "diff": ">=8.0.3",
+    "serialize-javascript": ">=7.0.5"
+  },
+  "dependencies": {
+    "@clangd/vscode-clangd": "^0.0.0",
+    "@viz-js/viz": "^3.4.0",
+    "npm-run-all": "^4.1.5",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.x",
+    "@types/vscode": "^1.110.0",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "esbuild": "^0.28.0",
+    "eslint": "^9.9.1",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^8.56.1"
+  }
+}
