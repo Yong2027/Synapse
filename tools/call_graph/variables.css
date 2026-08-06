@@ -1,0 +1,15 @@
+:root {
+  --background-color: #f5fffa;
+
+  --edge-color: #548f9e;
+  --edge-hover-color: #00bcd4;
+  --edge-incoming-color: #698b69;
+  --edge-outgoing-color: #008acd;
+  --edge-recursive-color: black;
+
+  --node-color: #dbeeff;
+  --node-content-color: black;
+  --node-highlight-color: red;
+  --node-hover-color: #e0e0e0;
+  /* 新增：节点悬停时的颜色 */
+}

@@ -1,0 +1,288 @@
+html, body { background: #f5fffa; }
+body {
+    font-family: Consolas, monospace;
+    padding: 20px;
+    padding-top: 28px; /* 为固定工具栏留出空间 */
+    color: #333;
+}
+.outgoing-toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 20px;
+    background: #f5fffa;
+    padding: 20px 20px;
+}
+#search-bar {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1000;
+    background: transparent;
+    padding: 0;
+    border-radius: 8px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 18px;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+.search-input-container {
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    height:26px;
+    background: rgba(245,255,250,1); 
+    min-width: 180px;
+    vertical-align: top; 
+  }
+  /* 搜索结果数量提示：固定在输入框尾部 */
+.search-result-count {
+    position: absolute;
+    right: 10px; /* 距离输入框右侧间距 */
+    top: 50%;
+    transform: translateY(-50%); /* 垂直居中 */
+    font-size: 12px; /* 小于输入文字，避免干扰 */
+    color: #666; /* 柔和灰色，不抢眼 */
+    font-family: Consolas, monospace; /* 与页面字体统一 */
+    pointer-events: none; /* 避免遮挡输入 */
+  }
+  /* 优化输入框聚焦样式（可选） */
+#searchBox:focus + .search-result-count {
+    color: #333; /* 聚焦时数量提示加深，提升辨识度 */
+  }
+.outgoing-select {
+    height: 28px;
+    min-width: 90px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #4a90e2;
+    padding: 0 12px;
+    margin-left: 4px;
+    background: #f5faff;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.outgoing-select:focus {
+    border-color: #357ab8;
+    box-shadow: 0 0 0 2px #e0eaff;
+    background: #f5faff; 
+    outline: none;
+}
+ul.tree,
+ul.tree ul {
+    list-style: none;
+    padding-left: 1.2em;
+}
+li {
+    margin: 6px 0;
+    cursor: pointer;
+    position: relative;
+    padding: 6px 10px;
+    border: 1px solid #0D6EFD;
+    border-radius: 8px;
+    background: #dbeeff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s, border-color 0.3s;
+}
+li:hover {
+    background-color: #e0e0e0;
+    border-color: #0D6EFD;
+}
+li.highlight {
+    background: #FDA500 !important;
+}
+li.current-highlight {
+    background: #FDA500 !important;
+    box-shadow: 0 0 8px rgba(255, 140, 0, 0.6) !important;
+}
+li.current-highlight > .node-label {
+    background: #FFD700 !important;
+    padding: 2px 4px !important;
+    border-radius: 3px !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+li.leaf-highlight {
+    background: #0074D9 !important;
+    color: #fff !important;
+}
+
+/* 所有节点都可以高亮的样式 */
+li.node-highlight {
+    background: #0074D9 !important;
+    color: #fff !important;
+}
+
+/* 防止高亮样式影响子节点 */
+li.node-highlight li {
+    background: #dbeeff !important;
+    color: #333 !important;
+}
+
+/* 子节点的hover效果 */
+li.node-highlight li:hover {
+    background-color: #e0e0e0 !important;
+    color: #333 !important;
+}
+
+
+.expand-icon {
+    display: inline-block;
+    width: 16px;
+    text-align: center;
+    margin-right: 0px;
+    margin-left: -16px;
+    user-select: none;
+    color: #4a4a4a;
+    position: relative;   
+    z-index: 2;
+    cursor: default; /* 默认光标 */
+}
+.expand-icon:hover {
+    cursor: pointer; /* hover 时变小手 */
+}
+ul.tree ul {
+    display: none;
+    margin-top: 8px;
+    padding-left: 15px;
+}
+li.expanded > ul {
+    display: block;
+}
+.node-label {
+    display: inline;
+    font-weight: 500;
+}
+ul.tree {
+    padding-left: 20px;
+    position: relative;
+}
+ul.tree li {
+    list-style: none;
+    padding-left: 20px;
+    position: relative;
+}
+ul.tree li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 8px;
+    width: 1px;
+    height: 100%;
+    border-left: 1px solid #ddd;
+}
+ul.tree li::after {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: 8px;
+    width: 12px;
+    height: 1px;
+    border-top: 1px solid #ddd;
+}
+ul.tree > li::before {
+    display: none;
+}
+.custom-hover-tooltip {
+    position: absolute;
+    z-index: 9999;
+    background: #fff;
+    color: #222;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    border: 1px solid #e0e0e0;
+    pointer-events: none;
+    white-space: pre-line;
+    line-height: 1.6;
+    max-width: 420px;
+    word-break: break-all;
+    overflow-wrap: break-word;
+}
+.context-menu {
+    position: absolute;
+    z-index: 99999;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+    min-width: 180px;
+    display: none;
+}
+.menu-item {
+    padding: 10px 18px;
+    cursor: pointer;
+    font-size: 15px;
+}
+.menu-item:hover {
+    background: #e8f0ff;
+}
+
+/* 搜索导航按钮样式 */
+
+.search-nav-btn {
+    min-width: 28px;
+    height: 26px;
+    background: transparent;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    padding: 2px 4px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.18s;
+    margin-left: 2px;
+    outline: none;
+}
+
+.search-nav-btn:hover {
+    background: #e0e0e0 !important;
+}
+
+.search-nav-btn:active {
+    background: #d0d0d0 !important;
+}
+
+.search-nav-btn:disabled {
+    background: #f8f8f8 !important;
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Pin icon cursor style */
+.node-pin-icon {
+    cursor: pointer !important;
+}
+
+/* Pinned node background style */
+/*li.pinned-node {
+    background: #d4f4dd !important; /* Light green background */
+    /* border-color: #28a745 !important; Green border */
+
+
+/* li.pinned-node:hover {
+    background: #c3e6cc !important; /* Slightly darker green on hover */
+    /*border-color: #28a745 !important;
+ */
+
+
+/* Pinned node background style */
+li.pinned-node {
+    background: #83c5ff ; /* 深蓝色背景 */
+    border-color: #0D6EFD ; /* 蓝色边框 */
+}
+
+li.pinned-node:hover {
+    background: #0074d9 !important; /* hover 时更深蓝色 */
+    border-color: #0074d9 !important;
+}

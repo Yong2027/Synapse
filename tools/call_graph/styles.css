@@ -1,0 +1,225 @@
+/* background */
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+body,
+svg {
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-color);
+}
+svg:focus{
+  outline: none;
+}
+svg:focus{
+  outline: none;
+}
+#graph0 > polygon:first-of-type {
+  fill: var(--background-color);
+}
+
+/* pointer */
+
+/* .edge,
+.cell.clickable {
+  cursor: pointer;
+} */
+.cell {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Cell */
+
+
+/* Edge */
+
+.edge > path {
+  /* stroke: var(--edge-color); */
+  stroke-width: 2;
+}
+.edge > polygon {
+  /* stroke: var(--edge-color); */
+  /* fill: var(--edge-color); */
+}
+
+.edge:hover > path:not(.hover-path) {
+  stroke: var(--edge-hover-color);
+}
+.edge:hover > polygon {
+  stroke: var(--edge-hover-color);
+  fill: var(--edge-hover-color);
+}
+
+.edge > path.hover-path {
+  stroke: transparent;
+  stroke-width: 15;
+}
+
+.impl > path {
+  stroke-dasharray: 8, 3;
+}
+.impl > polygon {
+  stroke-width: 2;
+  fill: none !important;
+}
+
+.incoming > path:not(.hover-path) {
+  stroke: var(--edge-incoming-color);
+}
+.incoming > polygon {
+  stroke: var(--edge-incoming-color);
+  fill: var(--edge-incoming-color);
+}
+
+.outgoing > path:not(.hover-path) {
+  stroke: var(--edge-outgoing-color);
+}
+.outgoing > polygon {
+  stroke: var(--edge-outgoing-color);
+  fill: var(--edge-outgoing-color);
+}
+
+.incoming.outgoing > path:not(.hover-path) {
+  stroke: var(--edge-recursive-color);
+}
+.incoming.outgoing > polygon {
+  stroke: var(--edge-recursive-color);
+  fill: var(--edge-recursive-color);
+}
+
+/* Node */
+/* .node > text {
+  fill: var(--node-content-color);
+} */
+/* 注释掉以允许 DOT 文件中的 fontcolor 生效 */
+
+
+/* 点击的节点蓝色背景优先级高于悬浮时显示的背景颜色 */
+.node.active-node > path {
+  fill: #0d6efd !important;
+}
+/* 点击的节点蓝色背景优先级高于悬浮时显示的背景颜色 */
+.node.active-node > path {
+  fill: #0d6efd !important;
+}
+.node:hover > path {
+  fill: var(--node-hover-color);
+  /* stroke: var(--node-hover-color); */
+}
+/* .cluster:hover > path {
+/* .cluster:hover > path {
+  fill: var(--node-hover-color);
+  /* stroke: var(--node-hover-color); 
+} */
+ /* .node:hover {
+  /* stroke: var(--node-hover-color); 
+} */
+ /* .node:hover {
+  cursor: pointer;
+} */
+
+.highlighted-node {
+  stroke-width: 3;
+}
+
+
+.context-menu {
+  position: absolute;
+  background-color: #ffffff; /* 背景白色 */
+  border: 1px solid #ccc;     /* 边框浅灰色 */
+  border-radius: 8px;         /* 圆角边框 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  min-width: 160px;
+  color: #333;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  gap: 8px; /* 图标与文字之间间距 */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.menu-item:hover {
+  background-color: #f0f0f0;
+}
+
+.menu-item i {
+  width: 16px;
+  text-align: center;
+  color: #666;
+}
+.shortcut {
+  float: right;
+  color: #999;
+  font-size: 0.85em;
+  margin-left: 10px;
+}
+.searchBtn:hover{
+    background: #e0e0e0;
+    color: black;
+    box-shadow: 0 4px 16px rgba(74,144,226,0.18);
+}
+.searchBtn:active {
+    background: #f5f5f5;
+    color: black;
+}
+/* 圆圈显示逻辑：折叠状态始终可见，展开状态仅在悬停时可见 */
+/* 折叠状态圆圈（plus-circle）始终可见 */
+svg .plus-circle, 
+svg g.plus-circle {
+  opacity: 1 !important;
+  transition: opacity 0.3s ease;
+}
+
+/* 展开状态圆圈（minus-circle）默认隐藏 */
+svg .minus-circle,
+svg g.minus-circle {
+  opacity: 0 !important;
+  transition: opacity 0.3s ease;
+}
+
+/* 节点悬停时显示展开状态圆圈 */
+svg .node:hover + .minus-circle,
+svg g.node:hover + g.minus-circle,
+svg .node:hover .minus-circle,
+svg g.node:hover g.minus-circle {
+  opacity: 1 !important;
+}
+
+/* 折叠状态圆圈在任何情况下都保持可见 */
+svg .node:hover + .plus-circle,
+svg g.node:hover + g.plus-circle,
+svg .node:hover .plus-circle,
+svg g.node:hover g.plus-circle {
+  opacity: 1 !important;
+}
+
+/* 圆圈本身悬停时的显示规则 */
+svg .plus-circle:hover,
+svg g.plus-circle:hover {
+  opacity: 1 !important;
+}
+
+svg .minus-circle:hover,
+svg g.minus-circle:hover {
+  opacity: 1 !important;
+}
